@@ -1,0 +1,26 @@
+{
+  "name": "todolist",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "server": "nodemon app.js",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "author": "Turichek",
+  "license": "ISC",
+  "dependencies": {
+    "@mui/icons-material": "^5.1.1",
+    "bcryptjs": "^2.4.3",
+    "concurrently": "^6.4.0",
+    "config": "^3.3.6",
+    "express": "^4.17.1",
+    "express-validator": "^6.13.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.0.13",
+    "nodemon": "^2.0.15",
+    "redux-devtools-extension": "^2.13.9"
+  }
+}
