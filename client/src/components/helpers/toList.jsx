@@ -6,11 +6,11 @@ const delay = 200;
 let timer = 0;
 let prevent = false; // eslint-disable-line
 
-export const addElemToList = (values, parent, dispatch, e = null) => {
-    if (values.name.value !== '') {
+export const addElemToList = (name, parent, dispatch, e = null) => {
+    if (name !== '') {
         let elem = {
             id: Date.now() + getRandomInt(1000),
-            name: values.name.value,
+            name: name,
             childs: false,
             parent: parent,
             edit: false,
@@ -29,6 +29,15 @@ export const addElemToList = (values, parent, dispatch, e = null) => {
     }
 }
 
+export const checkName = (elems,name) =>{
+    for(let i = 0; i < elems.length; i++){
+        if(elems[i].name === name){
+            return false;
+        }
+    }
+    return true;
+}
+
 export const editAttributes = (arr) => {
     for (let i = 0; i < arr.length; i++) {
         delete arr[i]._id;
@@ -45,6 +54,7 @@ export const updateElemName = (elem, dispatch, date) => {
 }
 
 export const addSublist = (elem, dispath) => {
+    delete elem.openChilds;
     elem.childs = true;
     dispath(updateElemAction(elem));
 }
