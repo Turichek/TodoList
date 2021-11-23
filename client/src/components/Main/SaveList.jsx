@@ -11,7 +11,7 @@ export default function SaveList() {
 
     const SaveToDB = async () => {
         try {
-            const data = await request('/api/lists/save', 'POST', { ...list });
+            const data = await request('/api/lists/saveAll', 'POST', { ...list });
             dispatch(openCloseAlertAction({ open: true, text: data.message, severity: 'success' }));
             console.log("Data: ", data);
         } catch (e) {

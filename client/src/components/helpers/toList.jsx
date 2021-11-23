@@ -29,6 +29,16 @@ export const addElemToList = (values, parent, dispatch, e = null) => {
     }
 }
 
+export const editAttributes = (arr) => {
+    for (let i = 0; i < arr.length; i++) {
+        delete arr[i]._id;
+        delete arr[i].__v;
+        if (arr[i].childs) {
+            arr[i].openChilds = false;
+        }
+    }
+}
+
 export const updateElemName = (elem, dispatch, date) => {
     elem.name = Date.parse(date.toString());
     dispatch(updateElemAction(elem));
@@ -85,14 +95,14 @@ const findIndexElem = (elem, list) => {
 export const UpElem = (e, elem, dispatch, list) => {
     const listWereElem = findList(elem, list);
     const prevElem = listWereElem[findIndexElem(elem, listWereElem) - 1];
-    if(prevElem === undefined){
+    if (prevElem === undefined) {
         dispatch(openCloseAlertAction({ open: true, text: "Это первый элемент списка", severity: 'info' }));
         return;
     }
 
     const indexElem = findIndexElem(elem, list.elems);
     const indexPrevElem = findIndexElem(prevElem, list.elems);
-    [list.elems[indexElem], list.elems[indexPrevElem]]  = [list.elems[indexPrevElem], list.elems[indexElem]];
+    [list.elems[indexElem], list.elems[indexPrevElem]] = [list.elems[indexPrevElem], list.elems[indexElem]];
 
     console.log(list.elems);
     dispatch(updateElemsAction(list.elems));
@@ -102,14 +112,14 @@ export const UpElem = (e, elem, dispatch, list) => {
 export const DownElem = (e, elem, dispatch, list) => {
     const listWereElem = findList(elem, list);
     const prevElem = listWereElem[findIndexElem(elem, listWereElem) + 1];
-    if(prevElem === undefined){
+    if (prevElem === undefined) {
         dispatch(openCloseAlertAction({ open: true, text: "Это последний элемент списка", severity: 'info' }));
         return;
     }
 
     const indexElem = findIndexElem(elem, list.elems);
     const indexPrevElem = findIndexElem(prevElem, list.elems);
-    [list.elems[indexElem], list.elems[indexPrevElem]]  = [list.elems[indexPrevElem], list.elems[indexElem]];
+    [list.elems[indexElem], list.elems[indexPrevElem]] = [list.elems[indexPrevElem], list.elems[indexElem]];
 
     console.log(list.elems);
     dispatch(updateElemsAction(list.elems));

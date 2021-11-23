@@ -6,6 +6,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { useDispatch, useSelector } from "react-redux";
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import FindChilds from "./FindChilds";
 
 export default function Sublist({ elem }) {
     const dispatch = useDispatch();
@@ -27,10 +28,20 @@ export default function Sublist({ elem }) {
                     <Button onClick={(e) => UpElem(e, elem, dispatch, list)} color='warning' sx={{ ml: 3 }} variant='contained'><ArrowUpwardIcon /></Button>
                     <Button onClick={(e) => DownElem(e, elem, dispatch, list)} color='warning' sx={{ ml: 1 }} variant='contained'><ArrowDownwardIcon /></Button>
                     <Button onClick={() => removeElem(elem, dispatch, list.elems)} sx={{ ml: 1 }} variant='contained' color='error'><DeleteIcon /></Button>
+
                     {elem.childs === false ?
                         <Button sx={{ ml: 1 }} onClick={() => addSublist(elem, dispatch)} color='success' variant='contained'>Добавить саблист</Button>
                         :
-                        <Button sx={{ ml: 1 }} onClick={() => deleteSublist(elem, dispatch, list.elems)} color='error' variant='contained'>Удалить саблист</Button>
+                        <>
+                            {
+                                elem?.openChilds === false ?
+                                <FindChilds elem={elem} />
+                                :
+                                null
+                            }
+                            
+                            <Button sx={{ ml: 1 }} onClick={() => deleteSublist(elem, dispatch, list.elems)} color='error' variant='contained'>Удалить саблист</Button>
+                        </>
                     }
                 </Box>
             }

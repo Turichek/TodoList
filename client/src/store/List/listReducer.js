@@ -1,4 +1,4 @@
-import { ADD_ELEM, UPDATE_ELEMS, UPDATE_ELEM, REMOVE_ELEM } from "./constants"
+import { ADD_ELEM, UPDATE_ELEMS, UPDATE_ELEM, REMOVE_ELEM, UPDATE_LIST } from "./constants"
 
 const defaulteState = {
     id: Date.now(),
@@ -12,6 +12,12 @@ export const listReducer = (state = defaulteState, action) => {
 
         case UPDATE_ELEMS:
             return { ...state, elems: action.payload }
+
+        case UPDATE_LIST:
+            return {
+                ...state,
+                ...action.payload
+            }
 
         case UPDATE_ELEM:
             return {
